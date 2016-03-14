@@ -13,8 +13,9 @@ FROM centos:centos7
 # File Author / Maintainer
 MAINTAINER Hoang Nguyen <dev.hoanggia@gmail.com>
 
-ENV SYMFONY_APP_DIR=/srv/nginx \
-    SYMFONY_APP_WWW=$SYMFONY_APP_DIR/www \
+ENV SYMFONY_APP_DIR=/srv/nginx
+
+ENV SYMFONY_APP_WWW=$SYMFONY_APP_DIR/www \
 	SYMFONY_APP_LOGS=$SYMFONY_APP_DIR/logs
 
 # Install tool
@@ -24,7 +25,7 @@ RUN yum  install -y nano
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
-COPY $SYMFONY_APP_DIR/nginx.repo /etc/yum.repos.d/
+COPY root/nginx.repo /etc/yum.repos.d/
 
 RUN yum --enablerepo=remi,remi-php56 install -y nginx php-fpm php-common
 RUN yum --enablerepo=remi,remi-php56 install -y php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
@@ -32,6 +33,8 @@ RUN yum --enablerepo=remi,remi-php56 install -y php-opcache php-pecl-apcu php-cl
 RUN yum clean all
 
 # Config Nginx
+RUN echo $SYMFONY_APP_WWW
+
 RUN mkdir -p $SYMFONY_APP_WWW
 RUN mkdir -p $SYMFONY_APP_LOGS
 RUN chown -R apache:apache $SYMFONY_APP_DIR
@@ -52,4 +55,4 @@ RUN chmod a+x $SYMFONY_APP_DIR/start.sh
 EXPOSE 80
 
 # Kicking in
-CMD ["$SYMFONY_APP_DIR/start.sh"]
+CMD ["echo ${SYMFONY_APP_DIR}/start.sh"]
