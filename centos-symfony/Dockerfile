@@ -55,4 +55,4 @@ RUN chmod a+x $SYMFONY_APP_DIR/start.sh
 EXPOSE 80
 
 # Kicking in
-CMD ["echo ${SYMFONY_APP_DIR}/start.sh"]
+CMD /srv/nginx/start.sh
