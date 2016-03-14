@@ -44,7 +44,7 @@ RUN mkdir /etc/nginx/sites-enabled
 
 COPY root/nginx.conf /etc/nginx
 COPY root/www.conf /etc/nginx/sites-available
-COPY root/health_check.php $SYMFONY_APP_DIR/healthcheck.php
+COPY root/health_status.php $SYMFONY_APP_DIR/health_status.php
 
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
