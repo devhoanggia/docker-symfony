@@ -7,4 +7,4 @@ echo "Starting Nginx..."
 /usr/sbin/nginx
 
 echo "Starting php-fpm..."
-/usr/sbin/php-fpm start
+/usr/sbin/php-fpm
