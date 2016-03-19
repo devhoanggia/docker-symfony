@@ -1,8 +1,7 @@
 ############################################################
-# Dockerfile to build Nginx Installed Containers
-# Based on Centos 7
+# Dockerfile build images
 # Name: Symfony Docker
-# Description: Build php-fpm and nginx for Symfony
+# Description: Build php56-fpm and nginx for symfony
 # Version: 0.0.1
 # Author: Gia Hoang Nguyen <dev.hoanggia@gmail.com>
 ############################################################
