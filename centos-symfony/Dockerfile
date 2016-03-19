@@ -27,7 +27,7 @@ COPY root/nginx.repo /etc/yum.repos.d/
 RUN yum --enablerepo=remi,remi-php56 install -y nginx php-fpm php-common
 RUN yum --enablerepo=remi,remi-php56 install -y php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
 
-RUN yum clean all
+RUN yum install -y supervisor && yum clean all
 
 # Config Nginx
 RUN mkdir -p $SYMFONY_APP_WWW
@@ -37,17 +37,18 @@ RUN chown -R apache:apache $SYMFONY_APP_DIR
 RUN mkdir /etc/nginx/sites-available
 RUN mkdir /etc/nginx/sites-enabled
 
-COPY root/nginx.conf /etc/nginx
-COPY root/www.conf /etc/nginx/sites-available
-COPY root/health_status.php $SYMFONY_APP_WWW
+COPY root/nginx.conf /etc/nginx/
+COPY root/www.conf /etc/nginx/sites-available/
+COPY root/health_status.php $SYMFONY_APP_WWW/
 
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
-COPY root/start.sh $SYMFONY_APP_DIR
+COPY root/start.sh $SYMFONY_APP_DIR/
 RUN chmod a+x $SYMFONY_APP_DIR/start.sh
+COPY root/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose ports
 EXPOSE 80
 
 # Kicking in
-CMD ["/srv/nginx/start.sh"]
+CMD ["/var/www/start.sh"]
