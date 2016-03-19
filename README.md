@@ -23,5 +23,5 @@ $ docker exec -it images_name /bin/bash
 ```
 * Check info
 ```
-$docker inspect images_name
+$ docker inspect images_name
 ```
