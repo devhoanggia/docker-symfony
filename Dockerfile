@@ -23,10 +23,10 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 COPY root/nginx.repo /etc/yum.repos.d/
 
-RUN yum --enablerepo=remi,remi-php56 install -y nginx php-fpm php-common
-RUN yum --enablerepo=remi,remi-php56 install -y php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
+RUN yum --enablerepo=remi,remi-php56 -y install nginx php-fpm php-common
+RUN yum --enablerepo=remi,remi-php56 -y install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
 
-RUN yum install -y supervisor && yum clean all
+RUN yum -y install supervisor && yum clean all
 
 # Config Nginx
 RUN mkdir -p $SYMFONY_APP_WWW
