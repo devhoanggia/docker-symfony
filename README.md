@@ -11,12 +11,12 @@
 ### Install
 * Run container
 ```
-$ docker run -d -P --name test images_name
+$ docker run -d -P --name symfony images_name
 ```
 
 * Volumes data
 ```
-$ docker run -d -P --name test -v /var/www/html/myfolder:/var/www/html images_name
+$ docker run -d -P --name test -v /var/www/html/symfony_resoure:/var/www/html/source images_name
 ```
 
 * Run command when container is running
