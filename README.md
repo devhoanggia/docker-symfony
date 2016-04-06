@@ -1,7 +1,8 @@
 ### Content
 * Symfony
+* Centos 7
 * Nginx
-* Php5-fpm
+* Php56-fpm
 
 ### Check status
 * http://server.name:port/check_status.php => /var/www/html
