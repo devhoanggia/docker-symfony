@@ -27,6 +27,8 @@ ENV SYMFONY_APP_DIR=/var/www
 ENV SYMFONY_APP_SOURCE=$SYMFONY_APP_DIR/html/source \
 	SYMFONY_APP_LOGS=$SYMFONY_APP_DIR/logs
 
+#check status system
+COPY data/check_server.php $SYMFONY_APP_DIR/html/
 
 RUN mkdir -p $SYMFONY_APP_SOURCE
 RUN mkdir -p $SYMFONY_APP_LOGS
@@ -36,11 +38,11 @@ RUN mkdir /etc/nginx/sites-enabled
 
 COPY data/nginx.conf /etc/nginx/
 COPY data/www.conf /etc/nginx/sites-available/
-COPY data/check_server.php $SYMFONY_APP_DIR/html/
-COPY data/start.sh /usr/local/bin/
 COPY data/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
+
+#start service
+COPY data/start.sh /usr/local/bin/
 RUN chmod a+x /usr/local/bin/start.sh
 
 # Expose ports
