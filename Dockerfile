@@ -47,6 +47,10 @@ RUN chmod a+x /usr/local/bin/start.sh
 
 # Expose ports
 EXPOSE 80
+EXPOSE 443
+
+# ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
+#RUN usermod -G users www-data
 
 # Kicking in
 CMD ["/usr/local/bin/start.sh"]
