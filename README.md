@@ -6,8 +6,8 @@
 
 ### Check status
 * http://server.name:port/check_status.php => /var/www/html
-* http://server.name:port/test.php => /var/www/html/source
-* http://server.name:port/app_dev.php  => /var/www/html/source
+* http://server.name:port/config.php       => /var/www/html/source/web
+* http://server.name:port/app_dev.php      => /var/www/html/source/web
 
 ### Install
 * Run container
