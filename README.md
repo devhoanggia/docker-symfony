@@ -31,7 +31,7 @@ $ docker inspect images_name
 ```
 
 * Structure folder
-... /var/www/html/
-...        |.....check_server.php
-...        |.....source/
-...        |.....logs/
+.../var/www/html/
+...|.....check_server.php
+...|.....source/
+...|.....logs/
