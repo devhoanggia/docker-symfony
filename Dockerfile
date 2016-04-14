@@ -41,7 +41,7 @@ ENV SYMFONY_APP_SOURCE=$SYMFONY_APP_DIR/html/source \
 	SYMFONY_APP_LOGS=$SYMFONY_APP_DIR/logs
 
 # Check status system
-COPY data/check_server.php $SYMFONY_APP_DIR/html/
+COPY data/check_server.php $SYMFONY_APP_DIR/html/check_server.php
 RUN mkdir -p $SYMFONY_APP_SOURCE
 RUN mkdir -p $SYMFONY_APP_LOGS
 RUN chown -R apache:apache $SYMFONY_APP_DIR
