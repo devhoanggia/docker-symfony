@@ -17,7 +17,7 @@ $ docker run -d -P --name symfony images_name
 
 * Volumes data
 ```
-$ docker run -d -P --name test -v /var/www/html/symfony_resoure:/var/www/html/source images_name
+$ docker run -d -P --name symfony -v /var/www/html/symfony_resoure:/var/www/html/source images_name
 ```
 
 * Run command when container is running
@@ -31,7 +31,8 @@ $ docker inspect images_name
 ```
 
 * Structure folder
-```/var/www/html
-   |.....check_server.php
-   |.....source/
-   |.....logs/```
+``` /var/www/html/
+        |.....check_server.php
+        |.....source/
+        |.....logs/
+```
