@@ -10,39 +10,47 @@
 FROM centos:centos7
 
 # File Author / Maintainer
-MAINTAINER Hoang Nguyen <dev.hoanggia@gmail.com>
+MAINTAINER Gia Hoang Nguyen <dev.hoanggia@gmail.com>
 
 # Install Nginx & PHP-FPM
 COPY data/nginx.repo /etc/yum.repos.d/
 
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-
 RUN yum --enablerepo=remi,remi-php56 -y install nginx php-fpm php-common
 RUN yum --enablerepo=remi,remi-php56 -y install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
+
+# Install supervisor
 RUN yum -y install supervisor && yum clean all
 
-# Config Nginx
+# Config nginx
+COPY data/nginx.conf /etc/nginx/nginx.conf
+
+# Config php.ini
+COPY data/php.ini /etc/php.ini
+
+# Create virtual server
+RUN mkdir /etc/nginx/sites-available
+RUN mkdir /etc/nginx/sites-enabled
+COPY data/www.conf /etc/nginx/sites-available/www.conf
+RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
+
+# Config evironment
 ENV SYMFONY_APP_DIR=/var/www
 ENV SYMFONY_APP_SOURCE=$SYMFONY_APP_DIR/html/source \
 	SYMFONY_APP_LOGS=$SYMFONY_APP_DIR/logs
 
-#check status system
+# Check status system
 COPY data/check_server.php $SYMFONY_APP_DIR/html/
-
 RUN mkdir -p $SYMFONY_APP_SOURCE
 RUN mkdir -p $SYMFONY_APP_LOGS
 RUN chown -R apache:apache $SYMFONY_APP_DIR
-RUN mkdir /etc/nginx/sites-available
-RUN mkdir /etc/nginx/sites-enabled
 
-COPY data/nginx.conf /etc/nginx/
-COPY data/www.conf /etc/nginx/sites-available/
+# Supervisor
 COPY data/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
-#start service
-COPY data/start.sh /usr/local/bin/
+# Start service
+COPY data/start.sh /usr/local/bin/start.sh
 RUN chmod a+x /usr/local/bin/start.sh
 
 # Expose ports
