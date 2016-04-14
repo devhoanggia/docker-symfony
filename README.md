@@ -30,7 +30,7 @@ $ docker exec -it images_name /bin/bash
 $ docker inspect images_name
 ```
 
-* Structure folder
+* Structure folder  
   /var/www/html/  
         |.....check_server.php  
         |.....source/  
