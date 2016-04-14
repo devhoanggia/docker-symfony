@@ -11,17 +11,17 @@
 
 ### Install
 * Run container
-```
+```bash
 $ docker run -d -P --name symfony images_name
 ```
 
 * Volumes data
-```
+```bash
 $ docker run -d -P --name symfony -v /var/www/html/symfony_resoure:/var/www/html/source images_name
 ```
 
 * Run command when container is running
-```
+```bash
 $ docker exec -it images_name /bin/bash
 ```
 
@@ -31,7 +31,7 @@ $ docker inspect images_name
 ```
 
 * Structure folder
-  /var/www/html/
-        |.....check_server.php
-        |.....source/
-        |.....logs/
+  /var/www/html/  
+        |.....check_server.php  
+        |.....source/  
+        |.....logs/  
