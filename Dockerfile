@@ -36,15 +36,13 @@ COPY data/www.conf /etc/nginx/sites-available/www.conf
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
 # Config evironment
-ENV SYMFONY_APP_DIR=/var/www
-ENV SYMFONY_APP_SOURCE=$SYMFONY_APP_DIR/html/source \
-	SYMFONY_APP_LOGS=$SYMFONY_APP_DIR/logs
+ENV SYMFONY_APP_SOURCE=/source \
+	SYMFONY_APP_LOGS=/logs
 
 # Check status system
-COPY data/check_server.php $SYMFONY_APP_DIR/html/check_server.php
 RUN mkdir -p $SYMFONY_APP_SOURCE
 RUN mkdir -p $SYMFONY_APP_LOGS
-RUN chown -R apache:apache $SYMFONY_APP_DIR
+RUN chown -R apache:apache $SYMFONY_APP_DIR $SYMFONY_APP_LOGS
 
 # Supervisor
 COPY data/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
