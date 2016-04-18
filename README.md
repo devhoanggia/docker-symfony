@@ -30,7 +30,7 @@ $ docker exec -it images_name /bin/bash
 $ docker inspect images_name
 ```
 
-* Timezone config
+* Timezone php config
 ``` date.timezone = UTC ```
 
 * Structure folder  
