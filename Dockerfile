@@ -15,6 +15,7 @@ MAINTAINER Gia Hoang Nguyen <dev.hoanggia@gmail.com>
 # Install Nginx & PHP-FPM
 COPY data/nginx.repo /etc/yum.repos.d/
 
+RUN yum -y update; yum clean all
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN yum --enablerepo=remi,remi-php56 -y install nginx php-fpm php-common
