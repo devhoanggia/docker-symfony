@@ -1,3 +1,3 @@
 #!/bin/bash
-#/usr/local/bin/start.sh
-/usr/bin/supervisord -c /supervisord.conf
+/usr/bin/supervisord -c /etc/supervisord.conf
+#/usr/bin/supervisord

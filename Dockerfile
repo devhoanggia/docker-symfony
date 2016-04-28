@@ -48,7 +48,7 @@ RUN mkdir -p $SYMFONY_APP_LOGS
 RUN chown -R apache:apache $SYMFONY_APP_DIR $SYMFONY_APP_LOGS
 
 # Supervisor
-COPY data/supervisord.conf /supervisord.conf
+COPY data/supervisord.conf /etc/supervisord.conf
 
 # Start service
 COPY data/start.sh /usr/local/bin/start.sh
