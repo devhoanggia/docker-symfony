@@ -1,7 +1,7 @@
 ############################################################
 # Dockerfile build images
-# Name: Nginx php-fpm Docker
-# Description: Server with php56-fpm and nginx for symfony
+# Name: Nginx php-fpm
+# Description: php56-fpm and nginx for Symfony on Docker
 # Version: 0.0.1
 # Author: Gia Hoang Nguyen <dev.hoanggia@gmail.com>
 ############################################################
