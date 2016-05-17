@@ -39,4 +39,4 @@ EXPOSE 443
 #RUN usermod -G users www-data
 
 # Kicking in
-CMD ["/usr/local/bin/start.sh"]
+CMD ["/start.sh"]
