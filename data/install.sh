@@ -15,7 +15,7 @@ config_nginx() {
     mkdir /etc/nginx/sites-available
     mkdir /etc/nginx/sites-enabled
     mkdir -p ${SYMFONY_APP_SOURCE}
-    chown -R apache:apache ${SYMFONY_APP_DIR}
+    chown -R apache:apache ${SYMFONY_APP_SOURCE}
 }
 
 install_nginx
