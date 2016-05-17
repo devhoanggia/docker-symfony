@@ -16,8 +16,8 @@ ENV SYMFONY_APP_SOURCE=/source
 
 # Before install
 COPY data/nginx.repo /etc/yum.repos.d/nginx.repo
-COPY data/install.sh /install.sh
-COPY data/start.sh /start.sh
+COPY exec/install.sh /install.sh
+COPY exec/start.sh /start.sh
 RUN chmod a+x /start.sh
 RUN chmod a+x /install.sh
 
