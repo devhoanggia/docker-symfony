@@ -34,6 +34,6 @@ $ docker inspect images_name
 ``` date.timezone = UTC ```
 
 * Structure folder
-        | /(root)
-        |...../source/
-        |...../logs/
+     -  | /(root)
+     -  |...../source/
+     -  |...../logs/
