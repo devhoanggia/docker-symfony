@@ -17,6 +17,7 @@ config_nginx() {
     mkdir -p ${SYMFONY_APP_SOURCE}
     chown -R apache:apache ${SYMFONY_APP_SOURCE}
 }
+#test
 
 install_nginx
 config_nginx
