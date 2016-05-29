@@ -1,8 +1,8 @@
 ### Content
 * Symfony
-* CentOs 7
+* Centos 7
 * Nginx
-* Php56-Fpm
+* Php56-fpm
 
 ### Check status
 * http://server.name:port/config.php       => /source/web
