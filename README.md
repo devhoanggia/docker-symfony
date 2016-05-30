@@ -36,7 +36,7 @@ $ docker inspect images_name
 * Timezone php.ini config
 ``` date.timezone = UTC ```
 
-* Use composer
+### Use composer
 ```
 $sudo vi /usr/local/bin/composer
 ```
