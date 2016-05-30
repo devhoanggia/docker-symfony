@@ -14,7 +14,10 @@ install_nginx() {
 config_nginx() {
     mkdir /etc/nginx/sites-available
     mkdir /etc/nginx/sites-enabled
+
+    usermod -u 1000 nginx
     mkdir -p ${SYMFONY_APP_SOURCE}
+    chown -R nginx:nginx ${SYMFONY_APP_SOURCE}
 }
 #test
 

@@ -29,8 +29,6 @@ COPY data/www.conf /etc/nginx/sites-available/www.conf
 COPY data/supervisord.conf /etc/supervisord.conf
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
-RUN usermod -u 1000 nginx
-
 # Expose ports
 EXPOSE 80
 
