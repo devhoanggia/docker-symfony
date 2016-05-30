@@ -29,9 +29,10 @@ COPY data/www.conf /etc/nginx/sites-available/www.conf
 COPY data/supervisord.conf /etc/supervisord.conf
 RUN cd /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/www.conf
 
+RUN usermod -u 1000 nginx
+
 # Expose ports
 EXPOSE 80
-EXPOSE 443
 
 # ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
 #RUN usermod -G users www-data
