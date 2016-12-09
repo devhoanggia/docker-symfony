@@ -1,0 +1,28 @@
+#!/bin/bash
+
+IMAGE_NAME="docker-symfony"
+
+if [ -z $1 ]; then
+    echo -e "Supported arguments:
+        * docker [|update|build|remove|info]
+    "
+elif [ "$1" == "docker" ]; then
+    if [ -z $2 ]; then
+        echo -e "Available options:
+            * update
+            * build
+            * remove
+            * info
+        "
+    elif [ "$2" == "update" ]; then
+        echo "Updating image '$IMAGE_NAME'..."
+        docker pull $IMAGE_NAME
+    elif [ "$2" == "build" ]; then
+        docker rmi -f $(docker images -f "dangling=true" -q)
+        docker build --no-cache -t=$IMAGE_NAME .
+    elif [ "$2" == "remove" ]; then
+        docker rmi $IMAGE_NAME
+    elif [ "$2" == "info" ]; then
+        docker inspect $IMAGE_NAME
+    fi
+fi

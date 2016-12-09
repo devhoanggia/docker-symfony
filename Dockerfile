@@ -18,6 +18,8 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 # Nginx repo
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
+COPY composer.phar /usr/local/bin/composer
+RUN chmod -R 777 /usr/local/bin/composer
 
 RUN yum -y --enablerepo=remi,remi-php71 install nginx php-fpm php-common
 RUN yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
