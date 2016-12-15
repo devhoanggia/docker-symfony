@@ -7,8 +7,11 @@
 # Set the base image to Centos
 FROM centos:centos7
 
-MAINTAINER Gia Hoang Nguyen <dev.hoanggia@gmail.com>
+MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
 ENV SYMFONY_APP_SOURCE=/data/www
+
+# Run updates
+#RUN yum -y update; yum clean all;
 
 ## Remi Dependency on CentOS 7 and Red Hat (RHEL) 7 ##
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
@@ -24,7 +27,7 @@ RUN chmod -R 777 /usr/local/bin/composer
 RUN yum -y --enablerepo=remi,remi-php71 install nginx php-fpm php-common
 RUN yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
 
-RUN yum -y install supervisor && yum clean all
+RUN yum -y install supervisor; yum clean all
 
 RUN mkdir -p SYMFONY_APP_SOURCE
 RUN chown -R apache:apache SYMFONY_APP_SOURCE
@@ -43,4 +46,4 @@ EXPOSE 80
 #RUN usermod -G users www-data
 
 # Kicking in
-CMD ["/usr/bin/supervisord -c /etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
