@@ -49,4 +49,8 @@ elif [ "$1" == "docker" ]; then
     elif [ "$2" == "ssh" ]; then
         docker exec -it $CONTAINER_NAME bash
     fi
+elif [ $# ]; then
+    echo "Command is not support!"
 fi
+
+
