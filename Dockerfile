@@ -8,7 +8,6 @@
 FROM centos:centos7
 
 MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
-ENV SYMFONY_APP_SOURCE=/data/www
 
 # Run updates
 #RUN yum -y update; yum clean all;
@@ -29,21 +28,22 @@ RUN yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cl
 
 RUN yum -y install supervisor; yum clean all
 
-RUN mkdir -p SYMFONY_APP_SOURCE
-RUN chown -R apache:apache SYMFONY_APP_SOURCE
+RUN mkdir -p /data/www
+RUN mkdir -p /data/logs
+RUN chown -R apache:apache /data
 RUN chown -R nginx:nginx /var/log/nginx
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # nginx and php setting
 COPY testsite.local.conf /etc/nginx/conf.d/testsite.local.conf
 COPY supervisord.conf /etc/supervisord.conf
 
+#ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
+#RUN usermod -G users www-data
 RUN usermod -u 1000 apache
 
 #Expose ports
 EXPOSE 80
-
-#ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
-#RUN usermod -G users www-data
 
 # Kicking in
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

@@ -21,12 +21,16 @@ elif [ "$1" == "docker" ]; then
     elif [ "$2" == "build" ]; then
         docker rmi -f $(docker images -f "dangling=true" -q)
         docker rmi -f $IMAGE_NAME
-        docker build --no-cache -t=$IMAGE_NAME .
+        docker build -t=$IMAGE_NAME .
     elif [ "$2" == "remove" ]; then
         docker rmi $IMAGE_NAME
     elif [ "$2" == "info" ]; then
         docker inspect $IMAGE_NAME
     elif [ "$2" == "test" ]; then
+        if docker ps -a | grep -qs test; then
+            echo "Removing current container..."
+            docker rm -f test
+        fi
         docker run -d --name test  $IMAGE_NAME
     elif [ "$2" == "ssh" ]; then
         docker run -it $IMAGE_NAME bash
