@@ -36,6 +36,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # nginx and php setting
 COPY testsite.local.conf /etc/nginx/conf.d/testsite.local.conf
+COPY symfony.conf /etc/nginx/conf.d/symfony.conf
 COPY supervisord.conf /etc/supervisord.conf
 
 #ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000

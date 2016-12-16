@@ -10,12 +10,17 @@
 ### Structure folder
 * Web source: /data/www
 
-### Setup
-* Build image
+### Exec
+* Add content to /etc/host
 ```
-$ docker build --no-cache -t="docker-symfony" .
-$ docker build -t=“docker-symfony" .
+testsite.local dev.local
+```
+* Run
+```
+./cmd docker start
+./cmd init
 ```
 
+### Config
 * Timezone php.ini config
 ``` date.timezone = UTC ```
