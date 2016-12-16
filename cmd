@@ -52,5 +52,3 @@ elif [ "$1" == "docker" ]; then
 elif [ $# ]; then
     echo "Command is not support!"
 fi
-
-
