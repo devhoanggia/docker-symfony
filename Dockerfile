@@ -24,7 +24,7 @@ COPY composer.phar /usr/local/bin/composer
 RUN chmod -R 777 /usr/local/bin/composer
 
 RUN yum -y --enablerepo=remi,remi-php71 install nginx php-fpm php-common
-RUN yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml
+RUN yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml
 
 RUN yum -y install supervisor; yum -y install git; yum clean all
 
