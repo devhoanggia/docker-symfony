@@ -7,20 +7,20 @@
 ### Available on docker hub
 * https://hub.docker.com/r/devhoanggia
 
-### Structure folder
+### Config
+* Timezone php.ini config
+``` date.timezone = UTC ```
 * Source: /data/www
 
-### Exec
-* Add content to /etc/host
+### Install
+* Add this line below  to /etc/host
 ```
-testsite.local dev.local
+test.local dev.local
 ```
-* Run
+* Run this command
 ```
 ./cli docker build
 ./cli docker test
 ```
-
-### Config
-* Timezone php.ini config
-``` date.timezone = UTC ```
+* http://test.local:9999
+* http://dev.local:9999

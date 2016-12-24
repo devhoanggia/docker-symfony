@@ -1,29 +1,26 @@
 #!/bin/bash
 
 IMAGE_NAME="docker-symfony"
-CONTAINER_NAME="docker-symfony-web-server"
-CONTAINER_FOLDER="/data/www"
+CONTAINER_NAME="docker-symfony-server"
+SOURCE="/data/www"
 CONTAINER_PORT="9999"
-
-function docker_run {
-    echo "Creating container '$CONTAINER_NAME'..."
-    docker run --name $CONTAINER_NAME -d -p $CONTAINER_PORT:80 -v `pwd`:$CONTAINER_FOLDER $IMAGE_NAME
-}
-
-function docker_exec {
-	if docker ps -a | grep -qs $CONTAINER_NAME; then
-		docker exec -it $CONTAINER_NAME bash -c "cd $CONTAINER_FOLDER; $*"
-	else
-        echo "Please start the container first!"
-        exit
-    fi
-}
 
 if [ -z $1 ]; then
     echo -e "Supported arguments:
-        * init
-        * docker [start|update|ssh]
+        * help
+        * docker [start|ssh|cmd]
     "
+elif [ "$1" == "help" ]; then
+    echo "Docker config"
+    echo "Images: $IMAGE_NAME"
+    echo "Container: $CONTAINER_NAME"
+    echo "Source: CONTAINER_FOLDER"
+    echo "Port: CONTAINER_PORT"
+    echo
+    echo "docker rmi $IMAGE_NAME"
+    echo "docker inspect $CONTAINER_TEST"
+    echo "docker logs $CONTAINER_TEST"
+
 elif [ "$1" == "init" ]; then
     echo "Initiating application..."
     chmod -R 777 app/cache
@@ -32,23 +29,26 @@ elif [ "$1" == "docker" ]; then
     if [ -z $2 ]; then
         echo -e "Available options:
             * start
-            * update
             * ssh
+            * cmd
         "
     elif [ "$2" == "start" ]; then
         if docker ps -a | grep -qs $CONTAINER_NAME; then
             echo "Removing current container..."
             docker rm -f $CONTAINER_NAME
         fi
-        docker_run
-    elif [ "$2" == "update" ]; then
-        echo "Updating image '$IMAGE_NAME'..."
-        docker pull $IMAGE_NAME
-    elif [ "$2" == "inspect" ]; then
-        docker inspect $IMAGE_NAME
+
+        echo "Creating container '$CONTAINER_NAME'..."
+        docker run --name $CONTAINER_NAME -d -p $CONTAINER_PORT:80 -v `pwd`:$SOURCE $IMAGE_NAME
+
     elif [ "$2" == "ssh" ]; then
         docker exec -it $CONTAINER_NAME bash
+    elif [ "$2" == "cmd" ]; then
+        if docker ps -a | grep -qs $CONTAINER_NAME; then
+            docker exec -it $CONTAINER_NAME bash -c "cd $SOURCE; $*"
+        else
+            echo "Please start the container first!"
+            exit
+        fi
     fi
-elif [ $# ]; then
-    echo "Command is not support!"
 fi
