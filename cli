@@ -1,38 +1,42 @@
 #!/bin/bash
 
 IMAGE_NAME="docker-symfony"
+CONTAINER_TEST="docker-symfony-test"
 
 if [ -z $1 ]; then
     echo -e "Supported arguments:
-        * docker [update|build|remove|info]
+        * docker [build|test|cmd]
+        * help
     "
+elif [ "$1" == "help" ]; then
+    echo "docker rmi $IMAGE_NAME"
+    echo "docker inspect $CONTAINER_TEST"
+    echo "docker logs $CONTAINER_TEST"
+
 elif [ "$1" == "docker" ]; then
     if [ -z $2 ]; then
         echo -e "Available options:
-            * update
             * build
-            * remove
-            * info
             * test
+            * ssh
         "
-    elif [ "$2" == "update" ]; then
-        echo "Updating image '$IMAGE_NAME'..."
-        docker pull $IMAGE_NAME
     elif [ "$2" == "build" ]; then
+       if docker ps -a | grep -qs $CONTAINER_TEST; then
+                echo "Removing current container..."
+                docker rm -f $CONTAINER_TEST
+        fi
+
         docker rmi -f $(docker images -f "dangling=true" -q)
         docker rmi -f $IMAGE_NAME
         docker build -t=$IMAGE_NAME .
-    elif [ "$2" == "remove" ]; then
-        docker rmi $IMAGE_NAME
-    elif [ "$2" == "info" ]; then
-        docker inspect $IMAGE_NAME
+
     elif [ "$2" == "test" ]; then
-        if docker ps -a | grep -qs test; then
+        if docker ps -a | grep -qs $CONTAINER_TEST; then
             echo "Removing current container..."
-            docker rm -f test
+            docker rm -f $CONTAINER_TEST
         fi
-        docker run -d --name test  $IMAGE_NAME
+        docker run -d --name $CONTAINER_TEST -p 9998:80 $IMAGE_NAME
     elif [ "$2" == "ssh" ]; then
-        docker run -it $IMAGE_NAME bash
+        docker exec -it $CONTAINER_TEST bash
     fi
 fi
