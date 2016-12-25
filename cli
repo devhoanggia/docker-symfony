@@ -21,7 +21,7 @@ elif [ "$1" == "docker" ]; then
             * ssh
         "
     elif [ "$2" == "build" ]; then
-       if docker ps -a | grep $CONTAINER_TEST; then
+       if docker ps -a | grep -qs $CONTAINER_TEST; then
             echo "Removing current container..."
             docker rm -f $CONTAINER_TEST
        fi
@@ -31,7 +31,7 @@ elif [ "$1" == "docker" ]; then
        docker build -t=$IMAGE_NAME .
 
     elif [ "$2" == "test" ]; then
-        if docker ps -a | grep $CONTAINER_TEST; then
+        if docker ps -a | grep -qs $CONTAINER_TEST; then
             echo "Removing current container..."
             docker rm -f $CONTAINER_TEST
         fi
