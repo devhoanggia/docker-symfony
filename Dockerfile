@@ -39,8 +39,7 @@ COPY dev.local.conf /etc/nginx/conf.d/dev.local.conf
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN sed -i -e "s/;date.timezone =/date.timezone = UTC/" /etc/php.ini
-#ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
-#RUN usermod -G users www-data
+
 RUN usermod -u 1000 apache
 
 #Expose ports
