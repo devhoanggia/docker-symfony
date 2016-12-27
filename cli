@@ -35,7 +35,7 @@ elif [ "$1" == "docker" ]; then
             echo "Removing current container..."
             docker rm -f $CONTAINER_TEST
         fi
-        docker run -d --name $CONTAINER_TEST -v `pwd`/store:/data/www -p 9999:80 $IMAGE_NAME
+        docker run -d --name $CONTAINER_TEST -v `pwd`/store:/data/www -p 7776:80 $IMAGE_NAME
     elif [ "$2" == "ssh" ]; then
         docker exec -it $CONTAINER_TEST bash
     fi

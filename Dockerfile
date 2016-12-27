@@ -20,11 +20,14 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN yum -y --enablerepo=remi,remi-php71 install nginx php-fpm php-common \
-    && yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml
+    && yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
 
-RUN yum -y install supervisor && yum -y install git && yum clean all
+RUN yum -y install supervisor && yum -y install git && yum group install -y "Development Tools" && yum clean all
 
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
+
+RUN pecl install -f xdebug
+COPY xdebug.ini /etc/php.d/xdebug.ini
 
 RUN mkdir -p /data/www
 RUN mkdir -p /data/logs
