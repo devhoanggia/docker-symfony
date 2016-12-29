@@ -19,8 +19,8 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 # Nginx repo
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
 
-RUN yum -y --enablerepo=remi,remi-php71 install nginx php-fpm php-common \
-    && yum -y --enablerepo=remi,remi-php71 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
+RUN yum -y --enablerepo=remi,remi-php65 install nginx php-fpm php-common \
+    && yum -y --enablerepo=remi,remi-php65 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
 
 RUN yum -y install supervisor && yum -y install git && yum group install -y "Development Tools" && yum clean all
 
