@@ -9,20 +9,22 @@ FROM centos:centos7
 
 MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
 
-# Run updates
-#RUN yum -y update; yum clean all;
-
 ## Remi Dependency on CentOS 7 and Red Hat (RHEL) 7 ##
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 ## CentOS 7 and Red Hat (RHEL) 7 ##
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 # Nginx repo
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
+COPY zend.repo /etc/yum.repos.d/zend.repo
 
-RUN yum -y --enablerepo=remi,remi-php65 install nginx php-fpm php-common \
-    && yum -y --enablerepo=remi,remi-php65 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
+RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
+    && yum -y --enablerepo=remi,remi-php56 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
 
-RUN yum -y install supervisor && yum -y install git && yum group install -y "Development Tools" && yum clean all
+RUN yum -y install supervisor \
+    && yum -y install git \
+    && yum -y install gcc gcc-c++ autoconf automake \
+    && yum -y install zend-server-nginx-php-56 \
+    && yum clean all
 
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
 
