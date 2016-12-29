@@ -9,12 +9,10 @@ FROM centos:centos7
 
 MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
 
-## Remi Dependency on CentOS 7 and Red Hat (RHEL) 7 ##
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
-## CentOS 7 and Red Hat (RHEL) 7 ##
-RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-# Nginx repo
-COPY nginx.repo /etc/yum.repos.d/nginx.repo
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+#COPY nginx.repo /etc/yum.repos.d/nginx.repo
 COPY zend.repo /etc/yum.repos.d/zend.repo
 
 RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
@@ -23,7 +21,7 @@ RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
 RUN yum -y install supervisor \
     && yum -y install git \
     && yum -y install gcc gcc-c++ autoconf automake \
-    && yum -y install zend-server-nginx-php-56 \
+    #&& yum -y install zend-server-nginx-php-5.6 \
     && yum clean all
 
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
