@@ -10,15 +10,17 @@ FROM centos:centos7
 MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
 
 RUN rpm --import https://rpms.remirepo.net/RPM-GPG-KEY-remi
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+
+RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 RUN rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-COPY zend.repo /etc/yum.repos.d/zend.repo
+COPY nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
     && yum -y --enablerepo=remi,remi-php56 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
 
-#COPY nginx.repo /etc/yum.repos.d/nginx.repo
+#COPY zend.repo /etc/yum.repos.d/zend.repo
 
 RUN yum -y install supervisor \
     && yum -y install git \
