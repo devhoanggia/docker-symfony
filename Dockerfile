@@ -18,14 +18,10 @@ RUN rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
-    && yum -y --enablerepo=remi,remi-php56 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel
-
-#COPY zend.repo /etc/yum.repos.d/zend.repo
+    && yum -y --enablerepo=remi,remi-php56 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel php-pecl-xdebug php-pecl-xhprof
 
 RUN yum -y install supervisor \
     && yum -y install git \
-    && yum -y install gcc gcc-c++ autoconf automake \
-    #&& yum -y install zend-server-nginx-php-5.6 \
     && yum clean all
 
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
