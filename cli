@@ -1,7 +1,7 @@
 #!/bin/bash
 
-IMAGE_NAME="docker-symfony"
-CONTAINER_TEST="docker-symfony-test"
+IMAGE_NAME="nginx:server"
+CONTAINER_TEST="nginx:test"
 
 if [ -z $1 ]; then
     echo -e "Supported arguments:
