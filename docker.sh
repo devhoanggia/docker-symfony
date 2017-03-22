@@ -2,6 +2,7 @@
 
 IMAGE="quay.io/devhoanggia/nginx"
 CONTAINER_NAME="nginx-server"
+CONTAINER_DIR="/data/www"
 PORT_HOST=82
 
 IMAGE_MYSQL="quay.io/devhoanggia/mysql"
