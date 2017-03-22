@@ -23,9 +23,6 @@ RUN yum -y install supervisor \
 
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
 
-RUN pecl install -f xdebug
-COPY xdebug.ini /etc/php.d/xdebug.ini
-
 RUN mkdir -p /data/www
 RUN mkdir -p /data/logs
 RUN chown -R apache:apache /data
