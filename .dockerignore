@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+cli.sh
+docker.sh
+.gitignore
+.idea
+README.md
+store
