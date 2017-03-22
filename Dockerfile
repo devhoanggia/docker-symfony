@@ -9,10 +9,7 @@ FROM centos:centos7
 
 MAINTAINER "Gia Hoang Nguyen" <dev.hoanggia@gmail.com>
 
-RUN rpm --import https://rpms.remirepo.net/RPM-GPG-KEY-remi
-RUN rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
 COPY nginx.repo /etc/yum.repos.d/nginx.repo
