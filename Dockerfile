@@ -31,8 +31,8 @@ RUN chown -R nginx:nginx /var/log/nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # nginx and php setting
-COPY dev.local.conf /etc/nginx/conf.d/symfony.conf
-COPY dev.local.conf /etc/nginx/conf.d/laravel.conf
+COPY symfony.conf /etc/nginx/conf.d/symfony.conf
+COPY laravel.conf /etc/nginx/conf.d/laravel.conf
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN sed -i -e "s/;date.timezone =/date.timezone = UTC/" /etc/php.ini
