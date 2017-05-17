@@ -1,11 +1,11 @@
 ### Content
-* Symfony
 * Centos 7
 * Nginx
-* Php71-fpm
+* PHP-FPM (7.1)
+* Support project Laravel, Symfony
 
 ### Available on docker hub
-* https://hub.docker.com/r/devhoanggia
+* http://quay.io/devhoanggia
 
 ### Config
 * Timezone php.ini config
@@ -15,12 +15,10 @@
 ### Install
 * Add this line below  to /etc/host
 ```
-test.local dev.local
+laravel.local symfony.local
 ```
+* Copy all file in `Deploy` folder to your project
 * Run this command
 ```
-./cli docker build
-./cli docker test
+$ docker-compose -f docker-compose.yml up -d
 ```
-* http://test.local:9999
-* http://dev.local:9999

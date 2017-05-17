@@ -1,0 +1,20 @@
+version: '2'
+services:
+  web:
+    container_name: laravel-web
+    image: quay.io/devhoanggia/nginx
+    ports:
+      - "82:80"
+    volumes:
+      - .:/data/www
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    container_name: laravel-db
+    image: quay.io/devhoanggia/mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - /Users/lap00344/MyProject/database:/store/db
