@@ -1,7 +1,8 @@
 version: '2'
 services:
   web:
-    container_name: laravel-web
+    build: .
+    container_name: server-web
     image: quay.io/devhoanggia/nginx
     ports:
       - "82:80"
@@ -12,7 +13,7 @@ services:
     depends_on:
       - db
   db:
-    container_name: laravel-db
+    container_name: server-db
     image: quay.io/devhoanggia/mysql
     ports:
       - "3307:3306"

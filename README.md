@@ -17,8 +17,12 @@
 ```
 laravel.local symfony.local
 ```
-* Copy all file in `Deploy` folder to your project
-* Run this command
+* Run this command to build and run container
 ```
-$ docker-compose -f docker-compose.yml up -d
+$ docker-compose -f docker-compose.yml up --build -d
+```
+
+### SSH Container
+```
+$ docker exec -it container_name bash
 ```
