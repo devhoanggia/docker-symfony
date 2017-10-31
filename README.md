@@ -1,4 +1,4 @@
-#Build image nginx with Docker
+# Build image nginx with Docker
 
 ### Content
 * Centos 7
