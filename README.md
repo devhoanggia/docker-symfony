@@ -1,4 +1,4 @@
-# Build image nginx with Docker
+# Docker build image
 
 ### Content
 * Centos 7
@@ -6,25 +6,23 @@
 * PHP-FPM (7.1)
 * Support project Laravel, Symfony
 
-### Available on docker hub
-* http://quay.io/devhoanggia
+### Available on quay.io
+* docker pull quay.io/devhoanggia/nginx
 
 ### Config
 * Timezone php.ini config
 ``` date.timezone = UTC ```
-* Source: /data/www
 
 ### Install
 * Add this line below  to /etc/host
 ```
 laravel.local symfony.local
 ```
-* Run this command to build and run container
+
+### Build image
 ```
-$ docker-compose -f docker-compose.yml up --build -d
+./cli build
 ```
 
-### SSH Container
-```
-$ docker exec -it container_name bash
-```
+### Run with out docker-compose
+    docker run -d -p 80:80 --name my-nginx -v "$PWD":/www quay.io/devhoanggia/nginx

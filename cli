@@ -1,0 +1,7 @@
+IMAGE_NAME="test-mysql"
+
+if [ "$1" == "build" ]; then
+   docker rmi -f $(docker images -f "dangling=true" -q)
+   docker rmi -f $IMAGE_NAME
+   docker build -t=$IMAGE_NAME .
+fi
