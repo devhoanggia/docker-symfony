@@ -24,7 +24,7 @@ RUN yum -y install supervisor \
 RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp composer.phar /usr/local/bin/composer && chmod -R 777 /usr/local/bin/composer
 
 RUN mkdir -p /www
-RUN mkdir -p /www/logs
+RUN mkdir -p /logs
 RUN chown -R apache:apache /www
 RUN chown -R nginx:nginx /var/log/nginx
 
