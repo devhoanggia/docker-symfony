@@ -14,8 +14,8 @@ RUN rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
 COPY conf/nginx.repo /etc/yum.repos.d/nginx.repo
 
-RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common \
-    && yum -y --enablerepo=remi,remi-php56 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel php-pecl-xdebug php-pecl-xhprof
+RUN yum -y --enablerepo=remi,remi-php72 install nginx php-fpm php-common \
+    && yum -y --enablerepo=remi,remi-php72 install php-opcache php-pecl-apcu php-cli php-pear php-pdo php-mysqlnd php-pgsql php-pecl-mongodb php-pecl-redis php-pecl-memcache php-pecl-memcached php-pecl-zip php-gd php-mbstring php-mcrypt php-xml php-devel php-pecl-xdebug php-pecl-xhprof
 
 RUN yum -y install supervisor \
     && yum -y install git \
