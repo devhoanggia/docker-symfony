@@ -25,4 +25,4 @@ laravel.local symfony.local
 ```
 
 ### Run with out docker-compose
-    docker run -d -p 80:80 --name my-nginx -v "$PWD":/www quay.io/devhoanggia/nginx
+    docker run -d -p 80:80 --name my-nginx -v "$PWD":/www/public quay.io/devhoanggia/nginx
