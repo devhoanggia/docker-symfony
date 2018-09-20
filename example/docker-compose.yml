@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    container_name: web-application
+    ports:
+      - 5000:80
+    image: quay.io/devhoanggia/nginx
+    volumes:
+      - ./:/www
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    container_name: mysql-applicaiton
+    image: quay.io/devhoanggia/mysql
+    ports:
+      - 5001:3306
+    environment:
+      - USERNAME=admin
+      - PASSWORD=123
