@@ -1,4 +1,4 @@
-IMAGE_NAME="test-mysql"
+IMAGE_NAME="test-nginx"
 
 if [ "$1" == "build" ]; then
    docker rmi -f $(docker images -f "dangling=true" -q)
