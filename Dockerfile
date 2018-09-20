@@ -25,9 +25,7 @@ RUN cd / && php -r "readfile('https://getcomposer.org/installer');" | php && cp 
 
 RUN mkdir -p /www && mkdir -p /logs && mkdir -p /var/run/php-fpm && chown -R apache:apache /www && chown -R nginx:nginx /var/log/nginx && echo "daemon off;" >> /etc/nginx/nginx.conf
 
-RUN sed -i -e "s/;date.timezone =/date.timezone = Asia/Ho_Chi_Minh/" /etc/php.ini
-
-RUN usermod -u 1000 apache
+RUN sed -i -e "s/;date.timezone =/date.timezone = Asia\/Ho_Chi_Minh/" /etc/php.ini && usermod -u 1000 apache
 
 # nginx and php setting
 COPY conf/symfony.conf /etc/nginx/conf.d/symfony.conf
